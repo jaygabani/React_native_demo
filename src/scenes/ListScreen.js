@@ -16,7 +16,7 @@ import DialogView from '../customComponent/DialogView';
 import AsyncStorage from '@react-native-community/async-storage';
 import {screenName} from '../Utils/util';
 
-const ListView = ({navigation}) => {
+const ListView = ({navigation, setIsLogin}) => {
   const [isLoading, setLoading] = useState(true);
   const [data, setData] = useState([]);
   const [DialogOpen, setDialogOpen] = useState(false);
@@ -56,7 +56,7 @@ const ListView = ({navigation}) => {
 
   return (
     <>
-      <LogoTitle navigation={navigation} />
+      <LogoTitle navigation={navigation} setIsLogin={setIsLogin} />
       <DialogView
         displayAlert={DialogOpen}
         displayAlertIcon={true}
@@ -79,7 +79,6 @@ const ListView = ({navigation}) => {
           <ActivityIndicator size="large" color="#8F6A35" />
         ) : (
           <FlatList
-            // horizontal={true}
             style={{
               width: '100%',
             }}
@@ -132,14 +131,13 @@ function LogoTitle(props) {
   const logOut = async () => {
     try {
       await AsyncStorage.clear();
+      props.setIsLogin(false);
     } catch (e) {
       console.log(e);
     }
-    props.navigation.replace(screenName.LoginScreen);
   };
 
   const BackPress = () => {
-    // props.navigation.goBack(); // only work some data in stack navigation
     BackHandler.exitApp();
   };
 

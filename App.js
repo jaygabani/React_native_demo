@@ -1,34 +1,54 @@
+import AsyncStorage from '@react-native-community/async-storage';
 import * as React from 'react';
-import {NavigationContainer} from '@react-navigation/native';
 import {createStackNavigator} from '@react-navigation/stack';
 
-import SplashScreen from './src/scenes/SplashScreen';
-import PreLoginScreen from './src/scenes/PreLoginScreen';
+import {screenName, STORAGE_IS_LOGIN} from './src/Utils/util';
+
 import LoginScreen from './src/scenes/LoginScreen';
 import ListScreen from './src/scenes/ListScreen';
-import {StatusBar, Text} from 'react-native';
+import {ActivityIndicator, StatusBar} from 'react-native';
+import SplashScreen from 'react-native-splash-screen';
+import {useEffect, useState} from 'react';
 
 const Stack = createStackNavigator();
 
-const App = () => {
+const App = props => {
+  const [isLogin, setIsLogin] = useState('');
+  const [isLoading, setisLoading] = useState(true);
+
+  const initialise = async () => {
+    let isLogin = await AsyncStorage.getItem(STORAGE_IS_LOGIN);
+    setIsLogin(isLogin);
+    setisLoading(false);
+    SplashScreen.hide();
+  };
+
+  useEffect(() => {
+    initialise();
+  }, []);
+
   return (
-    <NavigationContainer>
+    <>
       <StatusBar
         barStyle="light-content"
         hidden={false}
         backgroundColor="#8F6A35"
         translucent={false}
       />
-
-      <Stack.Navigator
-        initialRouteName="Splash"
-        screenOptions={{headerShown: false}}>
-        <Stack.Screen name="Splash" component={SplashScreen} />
-        <Stack.Screen name="PreLoginScreen" component={PreLoginScreen} />
-        <Stack.Screen name="LoginScreen" component={LoginScreen} />
-        <Stack.Screen name="ListScreen" component={ListScreen} />
-      </Stack.Navigator>
-    </NavigationContainer>
+      {isLoading ? (
+        <ActivityIndicator />
+      ) : isLogin ? (
+        <Stack.Navigator
+          initialRouteName={screenName.ListScreen}
+          screenOptions={{headerShown: false}}>
+          <Stack.Screen name={screenName.ListScreen}>
+            {props => <ListScreen {...props} setIsLogin={setIsLogin} />}
+          </Stack.Screen>
+        </Stack.Navigator>
+      ) : (
+        <LoginScreen setIsLogin={setIsLogin} />
+      )}
+    </>
   );
 };
 

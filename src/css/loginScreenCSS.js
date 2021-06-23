@@ -1,9 +1,12 @@
 import {StyleSheet} from 'react-native';
+import Colors from '../css/values/colors';
+import Size from '../css/values/size';
+
 const styles = StyleSheet.create({
   appButtonContainer: {
     elevation: 8,
-    backgroundColor: '#8F6A35',
-    borderRadius: 10,
+    backgroundColor: Colors.buttonColor,
+    borderRadius: Size.buttonBorderRadius,
     paddingHorizontal: 12,
     marginTop: 35,
     marginLeft: 15,
@@ -11,9 +14,9 @@ const styles = StyleSheet.create({
     alignSelf: 'stretch',
   },
   appButtonText: {
-    fontSize: 20,
+    fontSize: Size.buttonTextSize,
     color: '#fff',
-    padding: 8,
+    padding: Size.buttonPadding,
     fontFamily: 'josefinsans_semibold',
     alignSelf: 'center',
   },
@@ -25,7 +28,7 @@ const styles = StyleSheet.create({
     marginTop: 25,
     borderBottomWidth: 1,
     padding: 2,
-    fontSize: 18,
+    fontSize: Size.textMediumSize,
     alignSelf: 'stretch',
     color: '#8F6A35',
     height: 30,

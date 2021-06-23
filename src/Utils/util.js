@@ -1,8 +1,8 @@
-let STORAGE_USER_DETAIL = 'userDetail';
-let STORAGE_IS_LOGIN = 'isLogin';
+let STORAGE_USER_DETAIL = '@userDetail';
+let STORAGE_IS_LOGIN = '@isLogin';
+
 let screenName = {
   ListScreen: 'ListScreen',
-  PreLoginScreen: 'PreLoginScreen',
   LoginScreen: 'LoginScreen',
 };
 

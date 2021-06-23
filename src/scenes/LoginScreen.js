@@ -10,8 +10,9 @@ import {
 } from 'react-native';
 import {STORAGE_USER_DETAIL, STORAGE_IS_LOGIN, screenName} from '../Utils/util';
 import styles from '../css/loginScreenCSS';
+import Colors from '../css/values/colors';
 
-const LoginScreen = ({navigation}) => {
+const LoginScreen = ({setIsLogin}) => {
   const [emailId, setEmailId] = useState('');
   const [password, setPassword] = useState('');
   const [emailLabel, setEmailLabel] = useState(false);
@@ -36,17 +37,7 @@ const LoginScreen = ({navigation}) => {
       JSON.stringify(loginDetail),
     );
     await AsyncStorage.setItem(STORAGE_IS_LOGIN, JSON.stringify(true));
-
-    let isLogin = await AsyncStorage.getItem(STORAGE_IS_LOGIN);
-    let loginDet = await AsyncStorage.getItem(STORAGE_USER_DETAIL);
-
-    console.log(
-      'login : ' +
-        typeof JSON.parse(isLogin) +
-        ' \n loginDet : ' +
-        JSON.parse(loginDet),
-    );
-    navigation.replace(screenName.ListScreen);
+    setIsLogin(true);
   };
 
   const validate = () => {
@@ -111,7 +102,7 @@ const LoginScreen = ({navigation}) => {
                   multiline={false}
                   style={styles.borderBottom}
                   placeholder="E-mail address"
-                  placeholderTextColor={'#8F6A35'}
+                  placeholderTextColor={Colors.textGrey}
                   ref={emailRef}
                   value={emailId}
                   onChangeText={text => changeText(text, 'email')}
