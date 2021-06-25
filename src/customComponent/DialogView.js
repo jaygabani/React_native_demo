@@ -22,6 +22,7 @@ const DialogView = props => {
   };
 
   return (
+    // open dialog view and set different button tap effect
     <Modal
       visible={props.displayAlert}
       statusBarTranslucent={true}

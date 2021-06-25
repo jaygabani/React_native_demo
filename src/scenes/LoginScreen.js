@@ -75,9 +75,9 @@ const LoginScreen = ({setIsLogin}) => {
             style={styles.icon}
             source={require('../img/ic_login_user.png')}></Image>
           <View style={styles.textView}>
-            <View>
+            {/* <View>
               <Text style={styles.textSetup}>Sign Up</Text>
-            </View>
+            </View> */}
             <View style={[styles.borderTop, styles.marginText]}>
               <Text style={styles.textSetup}>Sign In</Text>
             </View>
@@ -116,7 +116,7 @@ const LoginScreen = ({setIsLogin}) => {
                   multiline={false}
                   style={styles.borderBottom}
                   placeholder="Password"
-                  placeholderTextColor={'#8F6A35'}
+                  placeholderTextColor={Colors.textGrey}
                   ref={passRef}
                   value={password}
                   secureTextEntry={true}

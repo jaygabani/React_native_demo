@@ -1,7 +1,7 @@
 const colors = {
   textColorMain: '#f15b5d',
   textGrey: '#c2c2c2',
-  buttonColor: '#f15b5d',
+  buttonColor: '#8F6A35',
   white: '#ffffff',
   black: '#000000',
   categoryBG: '#ffebe4',
