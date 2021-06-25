@@ -14,13 +14,13 @@ import styles from '../css/listScreenCSS';
 import axios from 'axios';
 import DialogView from '../customComponent/DialogView';
 import AsyncStorage from '@react-native-community/async-storage';
-import {screenName} from '../Utils/util';
+import {BASE_URL} from '../Utils/util';
 
 const ListView = ({navigation, setIsLogin}) => {
   const [isLoading, setLoading] = useState(true);
   const [data, setData] = useState([]);
   const [DialogOpen, setDialogOpen] = useState(false);
-  Geolocation.getCurrentPosition(info => console.warn(info));
+  // Geolocation.getCurrentPosition(info => console.warn(info));
 
   const onPressAlertPositiveButton = text => {
     if (text === '') {
@@ -44,7 +44,7 @@ const ListView = ({navigation, setIsLogin}) => {
   useEffect(() => {
     let options;
     options = {
-      url: `https://reactnative.dev/movies.json`,
+      url: `${BASE_URL}movies.json`,
       method: 'GET',
     };
     axios(options)

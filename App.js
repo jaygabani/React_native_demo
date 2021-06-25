@@ -14,12 +14,10 @@ const Stack = createStackNavigator();
 
 const App = props => {
   const [isLogin, setIsLogin] = useState('');
-  const [isLoading, setisLoading] = useState(true);
 
   const initialise = async () => {
     let isLogin = await AsyncStorage.getItem(STORAGE_IS_LOGIN);
     setIsLogin(isLogin);
-    setisLoading(false);
     SplashScreen.hide();
   };
 
@@ -35,9 +33,7 @@ const App = props => {
         backgroundColor="#8F6A35"
         translucent={false}
       />
-      {isLoading ? (
-        <ActivityIndicator />
-      ) : isLogin ? (
+      {isLogin ? (
         <Stack.Navigator
           initialRouteName={screenName.ListScreen}
           screenOptions={{headerShown: false}}>
